@@ -11,15 +11,9 @@ import javax.annotation.processing.SupportedSourceVersion;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class Main extends Application {
+public class Main {
     public static void main(String[] args) throws IOException {
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage stage) throws Exception {
         Renderer renderer = Renderer.getInstance();
-
 
         BubbleSort<Double> bubbleSort = new BubbleSort<>("Bubble sorter");
         SortingRenderer<Double> bubbleRenderer = new SortingRenderer<>(bubbleSort);
@@ -45,6 +39,7 @@ public class Main extends Application {
         bubbleRenderer.setData(listDouble);
         intRenderer.setData(list);
 
-        renderer.init(stage);
+        renderer.init();
     }
+
 }

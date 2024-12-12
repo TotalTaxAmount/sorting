@@ -1,5 +1,7 @@
 package dev.totaltax.sorters;
 
+import java.util.Arrays;
+
 public class BubbleSort<T extends Number> extends Sorter<T> {
 
     /**
@@ -22,8 +24,6 @@ public class BubbleSort<T extends Number> extends Sorter<T> {
             for (j = 0; j < l - i - 1; j++) {
                 if (listClone[j].doubleValue() > listClone[j + 1].doubleValue()) {
 
-                    // The next number in the list is less than the previous one,
-                    // This means we need to switch them around
                     temp = listClone[j];
                     listClone[j] = listClone[j + 1];
                     listClone[j + 1] = temp;
@@ -33,8 +33,9 @@ public class BubbleSort<T extends Number> extends Sorter<T> {
             }
 
             if (!swapped)
-                break; // If nothing was swapped then we can break out
+                break;
         }
-        return list;
+        System.out.println(Arrays.toString(listClone));
+        return listClone;
     }
 }

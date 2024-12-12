@@ -9,11 +9,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
+import java.util.List;
 
 public class SortingRenderer<T extends Number> extends JPanel {
     private final Sorter<T> sorter;
 
-    private final JPanel jStates = new JPanel();
+    private final JScrollPane jStates = new JScrollPane();
 
     private T[] data;
 
@@ -42,10 +43,13 @@ public class SortingRenderer<T extends Number> extends JPanel {
     public void init()  {
         System.out.println("[INFO] Initializing renderer for " + this.sorter.getName());
         this.add(new JLabel(this.sorter.getName()));
-        this.jStates.setLayout(new GridLayout(this.states.size(), 2));
+        this.jStates.setLayout(new ScrollPaneLayout());
         JButton sortButton = new JButton("Sort");
         JButton clearButton = new JButton("Clear");
         sortButton.addActionListener(e -> {
+            this.data = Renderer.getInstance().getInput().toArray(this.data);
+            System.out.println(Arrays.toString(this.data));
+
             this.jStates.removeAll();
             this.states = new LinkedHashSet<>(this.data.length);
             this.sorter.sort(this.data);
@@ -79,9 +83,12 @@ public class SortingRenderer<T extends Number> extends JPanel {
                 dlm.add(state_index++, entry);
             }
             this.jStates.add(scrollPane);
+            this.jStates.revalidate();
         }
         this.jStates.revalidate();
+        this.jStates.repaint();
         this.revalidate();
+        this.repaint();
     }
 
 
